@@ -85,10 +85,13 @@ class _DesktopHomePageState extends State<DesktopHomePage>
           alignment: Alignment.center,
           child: loadPowered(context),
         ),
-      Align(
-        alignment: Alignment.center,
-        child: loadLogo(),
-      ),
+      if (bind.isCustomClient())
+        _buildSigranadaBranding(context)
+      else
+        Align(
+          alignment: Alignment.center,
+          child: loadLogo(),
+        ),
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
       if (!isOutgoingOnly) buildPasswordBoard(context),
@@ -183,6 +186,28 @@ class _DesktopHomePageState extends State<DesktopHomePage>
       color: Theme.of(context).scaffoldBackgroundColor,
       child: ConnectionPage(),
     );
+  }
+
+  Widget _buildSigranadaBranding(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
+          fontSize: 9.5,
+          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+        );
+    return Column(
+      children: [
+        Image.asset(
+          'assets/sigranada-logo-horizontal.png',
+          width: 160,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(height: 2),
+        Text(
+          'Soporte remoto · www.sigranada.com',
+          textAlign: TextAlign.center,
+          style: textStyle,
+        ),
+      ],
+    ).marginOnly(left: 12, right: 12, top: 12, bottom: 4);
   }
 
   buildIDBoard(BuildContext context) {
