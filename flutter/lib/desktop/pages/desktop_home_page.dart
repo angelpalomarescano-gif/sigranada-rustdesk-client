@@ -85,13 +85,7 @@ class _DesktopHomePageState extends State<DesktopHomePage>
           alignment: Alignment.center,
           child: loadPowered(context),
         ),
-      if (bind.isCustomClient())
-        _buildSigranadaBranding(context)
-      else
-        Align(
-          alignment: Alignment.center,
-          child: loadLogo(),
-        ),
+      _buildSigranadaBranding(context),
       buildTip(context),
       if (!isOutgoingOnly) buildIDBoard(context),
       if (!isOutgoingOnly) buildPasswordBoard(context),
